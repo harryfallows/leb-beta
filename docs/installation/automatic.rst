@@ -3,7 +3,7 @@ Automatic Installation
 
 The automatic installation script can be downloaded using the following command:
 
-``wget https://bitbucket.org/enterobase/local_enterobase/raw/3166a403a3b6ebf9d0bb7a1feb672d190ac6ab0a/installer/local_enterobase_installer.sh``
+``wget https://bitbucket.org/enterobase/local_enterobase/raw/616f4d4c645e466de979bed1cb17b0413174481a/installer/local_enterobase_installer.sh``
 
 The script will automatically download, configure and run the Docker Image (NGINX), and Singularity image (PostgreSQL, Gunicorn and Local EnteroBase) and their dependencies packages.
 
