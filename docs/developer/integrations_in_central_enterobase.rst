@@ -6,4 +6,3 @@ Integrations in Central EnteroBase
 
    nginx_config
    register_local_enterobase
-   admin
