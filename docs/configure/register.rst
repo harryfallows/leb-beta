@@ -1,3 +1,5 @@
+.. _local-enterobase-registration-label:
+
 Registration
 ---------------
 
