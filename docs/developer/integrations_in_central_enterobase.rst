@@ -5,5 +5,5 @@ Integrations in Central EnteroBase
    :maxdepth: 2
 
    nginx_config
-   local_enterobase_register
+   register_local_enterobase
    admin
