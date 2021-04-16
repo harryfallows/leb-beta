@@ -1,3 +1,5 @@
+.. _upload-test-label:
+
 Upload Test
 -----------------
 
