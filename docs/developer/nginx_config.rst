@@ -14,8 +14,30 @@ There is more information regarding the contents of the "nginx.conf" file availa
 
 The above figure shows a screenshot of what the user sees when they go to the page. Below is a list of the validations enforced by the FlaskForm used to handle the input:
 
-1. Local EnteroBase Name: check if unique (no other instance with the same name) and between 1 and 64 characters.
-2. External URL: check if unique (no other instance with the same URL) and valid URL or IP with "https".
-3. Description & Justification: check if between 0 and 400 characters.
-4. Central EnteroBase Username of Local EnteroBase Admin: check if unique (admin has no other Local EnteroBase instances) and user is logged in as admin.
+* Web Server URL/IP: check if a valid URL or IP.
+* HTTP Port: check if integer.
+* HTTPS Port: check if integer.
+* Worker Connections: check if integer.
+* Send File Max Chunk (k): check if float.
+* Client Max Body Size (M): check if float.
+* Keep Alive Timeout (s): check if float.
+* Local EnteroBase Server URL/IP: check if a valid URL or IP.
+* Local EnteroBase Server Port: check if integer.
 
+By clicking the "Download nginx.conf", the relevant "nginx.conf" is sent to the user. From the user's perspecting, this file is downloaded to their default download folder.
+
+The custom "nginx.conf" file is created through the use of a template (found at "entero/local_enterobase/nginx.conf" within the Central EnteroBase repository) with some default values (as seen in Fig. 1). The default values are denoted using the following template: "{{<name of variable>:<default value>}}". Here is an example of this:
+
+::
+
+   events {
+      worker_connections  {{worker_connections:1024}};
+   }
+
+In this example, once the form is submitted, the "{{worker_connections:1024}}" part is replaced by the worker_connections value in the form (as shown in Fig. 1). If the user opts to keep the default value, the resulting file will contain the following:
+
+::
+
+   events {
+      worker_connections  1024;
+   }
