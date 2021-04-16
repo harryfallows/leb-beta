@@ -19,3 +19,4 @@ The following figure illustrates the Local EnteroBase folder structure, all the 
    egp
    pipeline
    testing
+   integrations_in_central_enterobase
