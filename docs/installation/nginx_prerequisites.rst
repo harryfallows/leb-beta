@@ -1,4 +1,4 @@
-.. _nginx-prerequiites-label:
+.. _nginx-prerequisites-label:
 
 NGINX Prerequisite Resources
 ----------------------------
