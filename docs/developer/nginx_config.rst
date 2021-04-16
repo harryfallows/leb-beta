@@ -1,12 +1,9 @@
-Local EnteroBase Integrations for Central EnteroBase
-----------------------------------------------------
-
-This page highlights the changes required in Central EnteroBase in order to enable Local EnteroBase to be installed and run correctly.
-
 NGINX Configuration Page
-========================
+-------------------------
 
-The NGINX configuration page is designed to enable the installer to obtain an "nginx.conf" file without having to write one from scratch. The user must simply input some basic details and the web-page returns the "nginx.conf" file. To read more about how the page looks from the point of view of the user, please take a look at the following page in the installation documentation: :ref:`nginx-prerequisites-label>`.
+The NGINX configuration page, available at the "local_enterobase/nginx_config" endpoint, is designed to enable the installer to obtain an "nginx.conf" file without having to write one from scratch. The user must simply input some basic details and the web-page returns the "nginx.conf" file. To read more about how the page looks from the point of view of the user, please take a look at the following page in the installation documentation: :ref:`nginx-prerequisites-label>`. All code relating to this page is available in the "entero/local_enterobase" directory of the Central EnteroBase repository.
+
+There is more information regarding the contents of the "nginx.conf" file available at: http://nginx.org/en/docs/http/ngx_http_core_module.html.
 
 .. figure:: ../images/nginx_config_page.png
    :width: 600
@@ -17,12 +14,30 @@ The NGINX configuration page is designed to enable the installer to obtain an "n
 
 The above figure shows a screenshot of what the user sees when they go to the page. Below is a list of the validations enforced by the FlaskForm used to handle the input:
 
-* Web Server URL/IP: 
-* HTTP Port: Port number for HTTP access to your Local EnteroBase instance. The default value is 80.
-* HTTPS Port: Port number for HTTPS access to your Local EnteroBase instance. The default value is 443.
-* Worker Connections: The maximum number of parallel connections that the Local EnteroBase instance can handle. The default value is 1024.
-* Send File Max Chunk (k): The maximum amount of data that can be sent with a single send_file() call in kilobytes. The default value is 1024.
-* Client Max Body Size (M): The maximum upload file size that the Local EnteroBase instance can handle in megabytes. The default value is 4000.
-* Keep Alive Timeout (s): How long the TCP connection between the client and the server stays open after an HTTP transaction has been completed in seconds. The default value is 1500.
-* **Local EnteroBase Server URL/IP**: The URL or IP address of the server facilitating the assembly of short-read files. This value will be the same as the "Web Server URL/IP" value if you have installed them on the same server.
-* Local EnteroBase Server Port: The port of the server facilitating the assembly of short-read files. The default value is 8000.
+* Web Server URL/IP: check if a valid URL or IP.
+* HTTP Port: check if integer.
+* HTTPS Port: check if integer.
+* Worker Connections: check if integer.
+* Send File Max Chunk (k): check if float.
+* Client Max Body Size (M): check if float.
+* Keep Alive Timeout (s): check if float.
+* Local EnteroBase Server URL/IP: check if a valid URL or IP.
+* Local EnteroBase Server Port: check if integer.
+
+By clicking the "Download nginx.conf", the relevant "nginx.conf" is sent to the user. From the user's perspecting, this file is downloaded to their default download folder.
+
+The custom "nginx.conf" file is created through the use of a template (found at "entero/local_enterobase/nginx.conf" within the Central EnteroBase repository) with some default values (as seen in Fig. 1). The default values are denoted using the following template: "{{<name of variable>:<default value>}}". Here is an example of this:
+
+::
+
+   events {
+      worker_connections  {{worker_connections:1024}};
+   }
+
+In this example, once the form is submitted, the "{{worker_connections:1024}}" part is replaced by the worker_connections value in the form (as shown in Fig. 1). If the user opts to keep the default value, the resulting file will contain the following:
+
+::
+
+   events {
+      worker_connections  1024;
+   }
